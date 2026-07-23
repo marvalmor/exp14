@@ -213,7 +213,7 @@ const contenidoExpedientes = {
       ["","","♗","","♙","","",""],
       ["","","","","","","",""],
       ["♙","♙","♙","♙","","♙","♙","♙"],
-      ["♖","♘","♗","","♔","♗","♘","♖"]
+      ["♖","♘","♗","","♔","","♘","♖"]
     ],
     pista: "El mate se logra capturando una pieza, no moviendo a una casilla vacía. Formato del código: pieza-archivo-fila (ej. 17-8-7).",
     codigoEsperado: "17-6-7",
@@ -253,6 +253,14 @@ const contenidoExpedientes = {
       { enunciado: "PASO 2:\n\nSuma el resultado anterior a la cantidad de cartas que se reparten a cada jugador al inicio de una partida de UNO (7).", respuesta: 31 }
     ],
     recompensa: "CADENA NUMÉRICA RESUELTA\n\nLos cálculos no eran aleatorios — dependían unos de otros. Como si nada de lo registrado existiera por separado.\n\nHipótesis actual: los eventos registrados parecen conectados entre sí, no aislados.\nNivel de confianza: alto"
+  },
+
+  7: {
+    titulo: "EXPEDIENTE 07 — Archivo corrupto",
+    evidencia: "ARCHIVO 07. Tipo: imagen. Estado: con mensaje oculto.",
+    tipoReto: "estegano",
+    mensajeOculto: "objeto o sujeto, aun sin resolver",
+    recompensa: "MENSAJE OCULTO EXTRAÍDO\n\nEl archivo no estaba dañado — estaba diseñado para pasar desapercibido. La información nunca dejó de estar ahí, solo esperaba el ajuste correcto para hacerse visible.\n\nHipótesis actual: el objeto —o el sujeto, según qué archivo se consulte— parece originarse en la misma fuente."
   }
 };
 
@@ -430,6 +438,91 @@ function abrirExpediente(numero) {
           document.getElementById("errorCircuito").textContent = "Esa no es la falla. Revisa el esquema de nuevo.";
         }
       });
+    });
+  } else if (data.tipoReto === "cadena") {
+    let pasoActual = 0;
+
+    function mostrarPaso() {
+      const paso = data.pasos[pasoActual];
+      modalReto.innerHTML = `
+        <p class="cifrado" style="white-space: pre-line; text-align:left;">${paso.enunciado}</p>
+        <p class="pista">${data.pista}</p>
+        <input type="number" id="inputCadena" placeholder="Resultado">
+        <button id="btnConfirmarCadena">Confirmar</button>
+        <p class="error" id="errorCadena"></p>
+      `;
+
+      document.getElementById("btnConfirmarCadena").addEventListener("click", function () {
+        const valorInput = document.getElementById("inputCadena").value;
+        if (valorInput.trim() === "") return;
+
+        const respuesta = parseInt(valorInput, 10);
+
+        if (respuesta === paso.respuesta) {
+          pasoActual++;
+          if (pasoActual < data.pasos.length) {
+            mostrarPaso();
+          } else {
+            modalReto.innerHTML = `<p class="pista">Cadena completa.</p>`;
+            modalRecompensa.style.whiteSpace = "pre-line";
+            modalRecompensa.style.textAlign = "left";
+            modalRecompensa.textContent = data.recompensa;
+            modalRecompensa.classList.remove("oculto");
+            marcarCompletado(numero);
+            actualizarEstadoCasilla(numero);
+          }
+        } else {
+          document.getElementById("errorCadena").textContent = "Ese no es el resultado correcto para este paso.";
+        }
+      });
+    }
+
+    mostrarPaso();
+  } else if (data.tipoReto === "estegano") {
+    modalReto.innerHTML = `
+      <div id="cajaEstegano">
+        <p id="mensajeEstegano">${data.mensajeOculto}</p>
+      </div>
+      <label class="pista" for="sliderContraste">Ajusta el contraste:</label>
+      <input type="range" id="sliderContraste" min="0" max="100" value="0">
+      <input type="text" id="inputEstegano" placeholder="Escribe el mensaje que leas">
+      <button id="btnConfirmarEstegano">Confirmar</button>
+      <p class="error" id="errorEstegano"></p>
+    `;
+
+    const slider = document.getElementById("sliderContraste");
+    const mensaje = document.getElementById("mensajeEstegano");
+
+    slider.addEventListener("input", function () {
+      const nivel = slider.value;
+      // el color del texto va de casi igual al fondo (#0a0a0a) hasta blanco (#fff)
+      const intensidad = Math.round((nivel / 100) * 255);
+      mensaje.style.color = `rgb(${intensidad}, ${intensidad}, ${intensidad})`;
+    });
+
+    document.getElementById("btnConfirmarEstegano").addEventListener("click", function () {
+      const valorInput = document.getElementById("inputEstegano").value
+        .trim()
+        .toLowerCase()
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+      const esperado = data.mensajeOculto
+        .toLowerCase()
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+      if (valorInput === "") return;
+
+      if (valorInput === esperado) {
+        modalReto.innerHTML = `<p class="cifrado">${data.mensajeOculto}</p>`;
+        modalRecompensa.style.whiteSpace = "pre-line";
+        modalRecompensa.style.textAlign = "left";
+        modalRecompensa.textContent = data.recompensa;
+        modalRecompensa.classList.remove("oculto");
+        marcarCompletado(numero);
+        actualizarEstadoCasilla(numero);
+      } else {
+        document.getElementById("errorEstegano").textContent = "El mensaje no coincide. Sigue ajustando el contraste.";
+      }
     });
   }
 
