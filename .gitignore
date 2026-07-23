@@ -1,0 +1,65 @@
+# Variables de entorno y credenciales
+.env
+.env.*
+*.env
+
+# Entornos virtuales
+venv/
+.venv/
+env/
+ENV/
+
+# Archivos generados por Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Builds y paquetes
+build/
+dist/
+*.egg-info/
+.eggs/
+*.egg
+
+# Pruebas y cobertura
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+.nox/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Editores
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs y archivos temporales
+*.log
+*.tmp
+*.temp
+*.bak
+
+# Bases de datos locales
+*.sqlite
+*.sqlite3
+*.db
+
+# Archivos comprimidos
+*.zip
+*.tar
+*.tar.gz
+
+# Archivos locales del proyecto
+data/
+output/
+outputs/

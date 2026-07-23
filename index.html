@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Expediente 14</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="portada"> 
+        <h1>EXPEDIENTE 14</h1>
+        <h2>El caso del objeto perdido</h2>
+            <p id="texto_prologo">
+                Hace 15 días se reportó la desaparición de un objeto clasificado. 
+                No conocemos su valor económico. No sabemos quién lo creó.
+                Solo sabemos que contiene información imposible de reemplazar.
+                Tu misión es recuperar los fragmentos que quedaron dispersos,
+                cada fragmento contiene una pista.
+                <p>Cada pista revela una parte del objeto perdido. </p>
+        <br><br>
+        <button id="iniciar"> Iniciar investigación </button>
+        </div> <br>
+    <div id="seccionExpedientes" class="oculto">
+  <h2>Fragmentos recuperados</h2>
+  <div id="contenedor"></div>
+</div>
+
+  <div id="modalOverlay" class="oculto">
+    <div id="modalContenido">
+      <button id="cerrarModal">✕</button>
+      <h3 id="modalTitulo"></h3>
+      <p id="modalEvidencia"></p>
+      <div id="modalReto"></div>
+      <div id="modalRecompensa" class="oculto"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
