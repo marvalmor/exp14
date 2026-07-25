@@ -42,7 +42,7 @@ async function fechaDeHoy() {
 
 async function estaDesbloqueado(fechaExpediente) {
   const hoy = await fechaDeHoy();
-  return true; // 👈 recuerda revertir a "return hoy >= fechaExpediente;" antes del 23
+  return  hoy >= fechaExpediente; // 👈 recuerda revertir a "return hoy >= fechaExpediente;" antes del 23
 }
 
 // --- Progreso guardado en el navegador ---
