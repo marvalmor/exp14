@@ -42,7 +42,7 @@ async function fechaDeHoy() {
 
 async function estaDesbloqueado(fechaExpediente) {
   const hoy = await fechaDeHoy();
-  return hoy >= fechaExpediente;; // 👈 recuerda revertir a "return hoy >= fechaExpediente;" antes del 23
+  return true; // 👈 recuerda revertir a "return hoy >= fechaExpediente;" antes del 23
 }
 
 // --- Progreso guardado en el navegador ---
@@ -204,20 +204,31 @@ const contenidoExpedientes = {
     titulo: "EXPEDIENTE 03 — La partida imposible",
     evidencia: "ARCHIVO 03. Tipo: registro estratégico. Estado: en análisis.",
     tipoReto: "ajedrez",
-    partida: "1. e4 e5\n2. Bc4 Nc6\n3. Qh5 Nf6??",
-    tablero: [
-      ["♜","","♝","♛","♚","♝","","♜"],
-      ["♟","♟","♟","♟","","♟","♟","♟"],
-      ["","","♞","","","♞","",""],
-      ["","","","","♟","","","♕"],
-      ["","","♗","","♙","","",""],
+    introduccion: "Posición recuperada. Blancas juegan.",
+    tableroInicial: [
+      ["","","","","","","","♚"],
+      ["","","","","","♟","",""],
       ["","","","","","","",""],
-      ["♙","♙","♙","♙","","♙","♙","♙"],
-      ["♖","♘","♗","","♔","","♘","♖"]
+      ["","","","♕","","","",""],
+      ["♖","","","","","","",""],
+      ["","","","","","","",""],
+      ["","","","","","","",""],
+      ["","","","","","♔","",""]
     ],
-    pista: "El mate se logra capturando una pieza, no moviendo a una casilla vacía. Formato del código: pieza-archivo-fila (ej. 17-8-7).",
-    codigoEsperado: "17-6-7",
-    recompensa: "ANÁLISIS ESTRATÉGICO\n\nEl registro muestra señales de haber sido manipulado por alguien con pensamiento no lineal. Se detectan múltiples intentos fallidos antes de cada acierto.\n\nConclusión preliminar: el sujeto no buscaba la respuesta rápida — buscaba la correcta.\n\nHipótesis actual: el objeto podría estar relacionado con un patrón de pensamiento, no con un lugar físico.\nNivel de confianza: medio"
+    tableroFinal: [
+      ["","","","","","","","♚"],
+      ["","","","","","","",""],
+      ["","","","","","","",""],
+      ["","","","","","♟","♕",""],
+      ["","","","","","","","♖"],
+      ["","","","","","","",""],
+      ["","","","","","","",""],
+      ["","","","","","♔","",""]
+    ],
+    leyenda: "Formato del código: (posición de la pieza en el abecedario)-(posición del archivo de destino en el abecedario)-(fila de destino).\n\nEjemplo (no es la solución): si la jugada fuera Nxc3, el código sería 14-3-3 → N es la 14ª letra, c es la 3ª letra, fila 3.",
+    pistaOculta: "La jugada clave no da jaque. Pero deja al rey negro sin ninguna casilla realmente segura: cualquier cosa que juegue, hay una entrada distinta hacia el mismo final.",
+    codigoEsperado: "17-7-5",
+    recompensa: "FRAGMENTO 03 RECUPERADO.\n\nPatrón detectado: múltiples líneas de juego descartadas antes de la definitiva. No se registra abandono en ningún intento previo.\n\nConclusión preliminar: el sujeto no buscaba la respuesta rápida — buscaba la correcta."
   },
   4: {
     titulo: "EXPEDIENTE 04 — El mensaje oculto",
@@ -226,41 +237,96 @@ const contenidoExpedientes = {
     enunciado: "Una vieja larga y seca,\nque le escurre la manteca.\n\n¿Qué es?",
     pista: "No es lo que tu mente maliciosa está pensando. Piensa en algo que se derrite lentamente.",
     respuestaEsperada: "vela",
-    recompensa: "REGISTRO VERBAL ANALIZADO\n\nLa frase no contenía información cifrada, sino una estructura de doble lectura. El significado real no estaba oculto — estaba disfrazado de otra cosa, esperando a que alguien mirara más allá de la primera interpretación.\n\nSe empieza a sospechar que el objeto perdido comparte esa misma característica.\n\nHipótesis actual: lo que se busca podría estar a la vista todo este tiempo, disfrazado de algo cotidiano.\nNivel de confianza: medio-alto"
+    recompensa: "REGISTRO VERBAL ANALIZADO\n\nLa frase no contenía información cifrada, sino una estructura de doble lectura. El significado real no estaba oculto — estaba disfrazado de otra cosa, esperando a que alguien mirara más allá de la primera interpretación.\n\nSe empieza a sospechar que el objeto perdido no está oculto, sino mal interpretado\n\nHipótesis actual: lo que se busca podría estar a la vista todo este tiempo, disfrazado de algo cotidiano.\nNivel de confianza: medio-alto"
   },
   5: {
     titulo: "EXPEDIENTE 05 — Frecuencia perdida",
     evidencia: "ARCHIVO 05. Tipo: esquema técnico. Estado: con anomalía.",
     tipoReto: "circuito",
-    diagrama: "CIRCUITO RECUPERADO (orden de conexión, de positivo a negativo):\n\nFuente 9V (+) → Resistencia 220Ω → LED: cátodo → ánodo → Fuente 9V (−)",
+    diagrama: "CIRCUITO RECUPERADO:\n\nFuente: 9V\nResistencia: 220Ω\nLED: caída de tensión directa ≈ 2V, corriente máxima recomendada: 20mA (0.02A)\nPolaridad: ánodo → cátodo, correctamente orientada.",
     opciones: [
-      "La resistencia es demasiado baja y quemará el LED",
       "El LED está conectado con la polaridad invertida",
+      "La resistencia es demasiado baja para la corriente máxima del LED",
       "Falta un capacitor de filtrado",
       "La fuente de 9V es insuficiente para encender el LED"
     ],
     respuestaCorrecta: 1,
-    recompensa: "CORRECCIÓN DETECTADA\n\nEl esquema fue corregido por un tercero no identificado antes de ser archivado. La corrección no buscaba que \"funcionara\" — buscaba que funcionara bien.\n\nDistinción relevante para el perfil del sujeto.\n\nHipótesis actual: quien diseñó estos archivos no se conforma con lo mínimo — revisa, corrige, perfecciona.\nNivel de confianza: medio-alto"
+    trollPolaridad: "Buen instinto — pero esta vez alguien sí revisó la polaridad antes de archivar esto. No es eso. Mira los números.",
+    preguntaNumerica: "Calcula el valor MÍNIMO de resistencia (en ohms) necesario para proteger el LED sin exceder su corriente máxima.\n\nDatos disponibles:\nVoltaje de la fuente: 9V\nCaída de tensión directa del LED: 2V\nCorriente máxima recomendada: 20mA",    minimoAceptado: 340,
+    maximoAceptado: 2000,
+    trollBajo: "Ese valor deja pasar demasiada corriente. El LED no va a durar ni para la foto.",
+    trollAlto: "Con esa resistencia el LED va a brillar tan poco que ni se va a notar que está encendido.",
+    recompensa: "CORRECCIÓN DETECTADA\n\nEl esquema fue corregido por un tercero no identificado antes de ser archivado. La versión original contenía un error; la versión recuperada, no.\n\nHipótesis actual: el expediente muestra señales de revisión externa. Su origen sigue sin esclarecerse."
   },
-
   6: {
     titulo: "EXPEDIENTE 06 — La ecuación",
     evidencia: "ARCHIVO 06. Tipo: registro numérico. Estado: encadenado.",
     tipoReto: "cadena",
-    pista: "El lugar donde ocurrió todo esto tenía dados y cartas por todas partes. Sigue la cadena con cuidado: cada resultado abre el siguiente paso.",
+    pista: "Los siguientes datos fueron reconstruidos a partir de una conversación incompleta. Solo una cifra es relevante para el informe.",
     pasos: [
-      { enunciado: "PASO 1:\n\nUn dado estándar tiene 6 caras. Multiplícalo por el número de palos en una baraja española de cartas (4).", respuesta: 24 },
-      { enunciado: "PASO 2:\n\nSuma el resultado anterior a la cantidad de cartas que se reparten a cada jugador al inicio de una partida de UNO (7).", respuesta: 31 }
-    ],
-    recompensa: "CADENA NUMÉRICA RESUELTA\n\nLos cálculos no eran aleatorios — dependían unos de otros. Como si nada de lo registrado existiera por separado.\n\nHipótesis actual: los eventos registrados parecen conectados entre sí, no aislados.\nNivel de confianza: alto"
-  },
+      {
+        enunciado: "PASO 1:\n\nUn dado estándar tiene 6 caras. Multiplícalo por el número de palos en una baraja española de cartas.",
+        respuesta: 24
+      },
+      {
+        enunciado: "PASO 2:\n\nEl registro menciona dos juegos esa noche. Antes de las cartas, alguien tiró dos dados para decidir quién empezaba. La tirada inicial terminó en empate.\n\nAplica esa diferencia al resultado anterior.",
+        respuesta: 24,
+        trampa: {
+          valor: 22,
+          mensaje: "Ese número sugiere que restaste algo (como la cantidad de jugadores) en vez de aplicar la diferencia real. Vuelve a leer: si los dados marcaron lo mismo, la diferencia es 0 — eso significa que el resultado no cambia."
+        }
+      },
+      {
+        enunciado: "PASO 3:\n\nSuma el numero de cartas cartas que recibe cada jugador al inicio de una partida de UNO.",
+        respuesta: 31,
+        trampa: {
+          valor: 62,
+          mensaje: "El registro nunca indicó aplicar el número de jugadores al resultado final. Revisa únicamente las operaciones solicitadas."
+        }
 
+      },
+    ],
+    recompensa: "CADENA NUMÉRICA RESUELTA\n\nLos cálculos no eran aleatorios — dependían unos de otros, y no todos los pasos exigían una operación: algunos exigían solo atención. Como si nada de lo registrado existiera por separado, y como si el descuido también dejara huella.\n\nHipótesis actual: los eventos registrados parecen conectados entre sí, no aislados.\nNivel de confianza: alto"
+},
   7: {
     titulo: "EXPEDIENTE 07 — Archivo corrupto",
-    evidencia: "ARCHIVO 07. Tipo: imagen. Estado: con mensaje oculto.",
+    evidencia: "ARCHIVO 07. Tipo: imagen. Estado: con mensaje oculto y corrupción de texto.",
     tipoReto: "estegano",
-    mensajeOculto: "objeto o sujeto, aun sin resolver",
+    mensajeRevuelto: "OSMIM NEGIRO — OTNITSID ERBMON",
+    mensajeEsperado: "mismo origen distinto nombre",
+    objetivoContraste: 63,
+    tolerancia: 2,
     recompensa: "MENSAJE OCULTO EXTRAÍDO\n\nEl archivo no estaba dañado — estaba diseñado para pasar desapercibido. La información nunca dejó de estar ahí, solo esperaba el ajuste correcto para hacerse visible.\n\nHipótesis actual: el objeto —o el sujeto, según qué archivo se consulte— parece originarse en la misma fuente."
+  },
+  8: {
+    titulo: "EXPEDIENTE 08 — Cuatro oficinas, un mismo mensaje",
+    evidencia: "ARCHIVO 08. Tipo: informes cruzados. Estado: una fuente no coincide con las demás.",
+    tipoReto: "informes",
+    informes: [
+      {
+        oficina: "Oficina de Madrid",
+        idioma: "Español",
+        texto: "El archivo se deterioró, pero el mensaje llegó intacto porque había sido resguardado con anticipación."
+      },
+      {
+        oficina: "Oficina de Londres",
+        idioma: "Inglés",
+        texto: "The file deteriorated, but the message arrived intact because it had been safeguarded in advance."
+      },
+      {
+        oficina: "Oficina de París",
+        idioma: "Francés",
+        texto: "Le fichier s'est détérioré, mais le message est arrivé intact parce qu'il avait été protégé à l'avance."
+      },
+      {
+        oficina: "Oficina no identificada",
+        idioma: "Inglés",
+        texto: "The file deteriorated, and the message arrived intact, which is why it had been safeguarded in advance."
+      }
+    ],
+    indiceAlterado: 3,
+    pistaOculta: "No busques errores de gramática — no los hay. Busca cuál versión cambia qué fue la causa y qué fue la consecuencia.",
+    recompensa: "ANÁLISIS FORENSE — COMPARACIÓN DE INFORMES\n\nTres oficinas, tres idiomas, un mismo significado. La cuarta fuente invierte el orden lógico: sugiere que la protección fue consecuencia de la integridad del archivo, no su causa.\n\nConclusión preliminar: el significado original sobrevivió al cambio de idioma en tres de los cuatro registros. Solo uno de ellos no proviene de una traducción — proviene de una alteración."
   }
 };
 
@@ -352,11 +418,13 @@ function abrirExpediente(numero) {
     });
 
   } else if (data.tipoReto === "ajedrez") {
+    let intentosAjedrez = 0;
+
     modalReto.innerHTML = `
-      <p class="cifrado" style="white-space: pre-line; text-align:left;">${data.partida}</p>
-      ${generarTablero(data.tablero)}
-      <p class="pista">${data.pista}</p>
-      <input type="text" id="inputAjedrez" placeholder="Código (ej. 17-8-7)">
+      <p class="cifrado" style="white-space: pre-line; text-align:left;">${data.introduccion}</p>
+      ${generarTablero(data.tableroInicial)}
+      <p class="pista" style="white-space: pre-line;">${data.leyenda}</p>
+      <input type="text" id="inputAjedrez" placeholder="Código (ej. 14-3-3)">
       <button id="btnResolverAjedrez">Confirmar</button>
       <p class="error" id="errorAjedrez"></p>
     `;
@@ -367,6 +435,10 @@ function abrirExpediente(numero) {
       if (valorInput === "") return;
 
       if (valorInput === data.codigoEsperado) {
+        modalReto.innerHTML = `
+          <p class="pista">Jugada correcta. Posición final:</p>
+          ${generarTablero(data.tableroFinal)}
+        `;
         modalRecompensa.style.whiteSpace = "pre-line";
         modalRecompensa.style.textAlign = "left";
         modalRecompensa.textContent = data.recompensa;
@@ -374,7 +446,12 @@ function abrirExpediente(numero) {
         marcarCompletado(numero);
         actualizarEstadoCasilla(numero);
       } else {
-        document.getElementById("errorAjedrez").textContent = "Código incorrecto. Revisa la jugada.";
+        intentosAjedrez++;
+        if (intentosAjedrez >= 2) {
+          document.getElementById("errorAjedrez").textContent = `Código incorrecto. Pista: ${data.pistaOculta}`;
+        } else {
+          document.getElementById("errorAjedrez").textContent = "Código incorrecto. Revisa la posición de nuevo.";
+        }
       }
     });
 
@@ -423,17 +500,38 @@ function abrirExpediente(numero) {
     document.querySelectorAll(".opcion-circuito").forEach((boton) => {
       boton.addEventListener("click", function () {
         const indexSeleccionado = parseInt(this.dataset.index, 10);
+
         if (indexSeleccionado === data.respuestaCorrecta) {
           modalReto.innerHTML = `
-            <p class="cifrado" style="white-space:pre-line; text-align:left;">${data.diagrama}</p>
+            <p class="cifrado" style="white-space: pre-line; text-align:left;">${data.diagrama}</p>
             <p class="pista">✔ ${data.opciones[indexSeleccionado]}</p>
+            <p class="cifrado" style="white-space: pre-line; text-align:left;">${data.preguntaNumerica}</p>
+            <input type="number" id="inputCircuito" placeholder="Ohms">
+            <button id="btnConfirmarCircuito">Confirmar</button>
+            <p class="error" id="errorCircuitoNum"></p>
           `;
-          modalRecompensa.style.whiteSpace = "pre-line";
-          modalRecompensa.style.textAlign = "left";
-          modalRecompensa.textContent = data.recompensa;
-          modalRecompensa.classList.remove("oculto");
-          marcarCompletado(numero);
-          actualizarEstadoCasilla(numero);
+
+          document.getElementById("btnConfirmarCircuito").addEventListener("click", function () {
+            const valor = parseFloat(document.getElementById("inputCircuito").value);
+            if (isNaN(valor)) return;
+
+            if (valor >= data.minimoAceptado && valor <= data.maximoAceptado) {
+              modalReto.innerHTML = `<p class="pista">Cálculo correcto: ${valor}Ω</p>`;
+              modalRecompensa.style.whiteSpace = "pre-line";
+              modalRecompensa.style.textAlign = "left";
+              modalRecompensa.textContent = data.recompensa;
+              modalRecompensa.classList.remove("oculto");
+              marcarCompletado(numero);
+              actualizarEstadoCasilla(numero);
+            } else if (valor < data.minimoAceptado) {
+              document.getElementById("errorCircuitoNum").textContent = data.trollBajo;
+            } else {
+              document.getElementById("errorCircuitoNum").textContent = data.trollAlto;
+            }
+          });
+
+        } else if (indexSeleccionado === 0) {
+          document.getElementById("errorCircuito").textContent = data.trollPolaridad;
         } else {
           document.getElementById("errorCircuito").textContent = "Esa no es la falla. Revisa el esquema de nuevo.";
         }
@@ -481,24 +579,38 @@ function abrirExpediente(numero) {
   } else if (data.tipoReto === "estegano") {
     modalReto.innerHTML = `
       <div id="cajaEstegano">
-        <p id="mensajeEstegano">${data.mensajeOculto}</p>
+        <p id="mensajeEstegano">${data.mensajeRevuelto}</p>
       </div>
-      <label class="pista" for="sliderContraste">Ajusta el contraste:</label>
+      <label class="pista" for="sliderContraste">Sintoniza la señal:</label>
       <input type="range" id="sliderContraste" min="0" max="100" value="0">
-      <input type="text" id="inputEstegano" placeholder="Escribe el mensaje que leas">
-      <button id="btnConfirmarEstegano">Confirmar</button>
+      <div id="faseReconstruccion" class="oculto">
+        <input type="text" id="inputEstegano" placeholder="Escribe el mensaje reconstruido">
+        <button id="btnConfirmarEstegano">Confirmar</button>
+      </div>
       <p class="error" id="errorEstegano"></p>
     `;
 
     const slider = document.getElementById("sliderContraste");
     const mensaje = document.getElementById("mensajeEstegano");
+    const faseReconstruccion = document.getElementById("faseReconstruccion");
 
+    
     slider.addEventListener("input", function () {
-      const nivel = slider.value;
-      // el color del texto va de casi igual al fondo (#0a0a0a) hasta blanco (#fff)
-      const intensidad = Math.round((nivel / 100) * 255);
-      mensaje.style.color = `rgb(${intensidad}, ${intensidad}, ${intensidad})`;
-    });
+      const nivel = Number(slider.value);
+      const distancia = Math.abs(nivel - data.objetivoContraste);
+      const dentroDeTolerancia = distancia <= data.tolerancia;
+
+      // el blur crece mientras más lejos estés; en tolerancia, blur = 0 (nítido)
+      const cantidadBlur = dentroDeTolerancia ? 0 : Math.min(distancia * 0.6, 10);
+      mensaje.style.filter = `blur(${cantidadBlur}px)`;
+
+      if (dentroDeTolerancia) {
+        faseReconstruccion.classList.remove("oculto");
+      } else {
+        faseReconstruccion.classList.add("oculto");
+      }
+    })
+    slider.dispatchEvent(new Event("input"));;
 
     document.getElementById("btnConfirmarEstegano").addEventListener("click", function () {
       const valorInput = document.getElementById("inputEstegano").value
@@ -506,14 +618,14 @@ function abrirExpediente(numero) {
         .toLowerCase()
         .normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-      const esperado = data.mensajeOculto
+      const esperado = data.mensajeEsperado
         .toLowerCase()
         .normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
       if (valorInput === "") return;
 
       if (valorInput === esperado) {
-        modalReto.innerHTML = `<p class="cifrado">${data.mensajeOculto}</p>`;
+        modalReto.innerHTML = `<p class="cifrado">${data.mensajeEsperado.toUpperCase()}</p>`;
         modalRecompensa.style.whiteSpace = "pre-line";
         modalRecompensa.style.textAlign = "left";
         modalRecompensa.textContent = data.recompensa;
@@ -521,8 +633,46 @@ function abrirExpediente(numero) {
         marcarCompletado(numero);
         actualizarEstadoCasilla(numero);
       } else {
-        document.getElementById("errorEstegano").textContent = "El mensaje no coincide. Sigue ajustando el contraste.";
+        document.getElementById("errorEstegano").textContent = "El mensaje reconstruido no coincide. Revisa el anagrama.";
       }
+    });
+  }
+  else if (data.tipoReto === "informes") {
+    let intentosInformes = 0;
+
+    modalReto.innerHTML = `
+      <p class="pista">Cuatro oficinas reportaron el mismo hallazgo. Una de ellas no coincide con las otras tres. Encuéntrala.</p>
+      <div id="listaInformes"></div>
+      <p class="error" id="errorInformes"></p>
+    `;
+
+    const listaInformes = document.getElementById("listaInformes");
+
+    data.informes.forEach(function (informe, indice) {
+      const tarjeta = document.createElement("button");
+      tarjeta.classList.add("tarjeta-informe");
+      tarjeta.innerHTML = `<strong>${informe.oficina} (${informe.idioma})</strong><br>${informe.texto}`;
+
+      tarjeta.addEventListener("click", function () {
+        if (indice === data.indiceAlterado) {
+          modalRecompensa.style.whiteSpace = "pre-line";
+          modalRecompensa.style.textAlign = "left";
+          modalRecompensa.textContent = data.recompensa;
+          modalRecompensa.classList.remove("oculto");
+          marcarCompletado(numero);
+          actualizarEstadoCasilla(numero);
+        } else {
+          intentosInformes++;
+          const errorInformes = document.getElementById("errorInformes");
+          if (intentosInformes >= 2) {
+            errorInformes.textContent = `Ese informe es coherente con los demás. Pista: ${data.pistaOculta}`;
+          } else {
+            errorInformes.textContent = "Ese informe es coherente con los demás. Vuelve a leer con cuidado.";
+          }
+        }
+      });
+
+      listaInformes.appendChild(tarjeta);
     });
   }
 

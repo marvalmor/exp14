@@ -164,3 +164,21 @@ body {
 .casilla-oscura {
   background: #1a1a1a;
 }
+
+.tarjeta-informe {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: #1a1a1a;
+  color: #e0e0e0;
+  border: 1px solid #444;
+  border-radius: 6px;
+  padding: 12px;
+  margin: 8px 0;
+  cursor: pointer;
+  font-family: monospace;
+}
+
+.tarjeta-informe:hover {
+  border-color: #4caf50;
+}
