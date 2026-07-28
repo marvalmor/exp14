@@ -182,3 +182,74 @@ body {
 .tarjeta-informe:hover {
   border-color: #4caf50;
 }
+
+.luz-ritmo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  margin: 4px;
+  border: 1px solid #444;
+  border-radius: 50%;
+  font-size: 14px;
+  background: #111;
+  transition: background 0.2s ease;
+}
+
+.luz-activa {
+  background: #4caf50;
+  color: #0d0d0d;
+  font-weight: bold;
+}
+.tarjeta-perfil {
+  background: #1a1a1a;
+  border: 1px solid #444;
+  border-radius: 6px;
+  padding: 12px;
+  margin: 8px 0;
+  text-align: left;
+  font-size: 13px;
+}
+.sobre-cerrado {
+  font-size: 60px;
+  cursor: pointer;
+  text-align: center;
+  animation: pulso-sobre 1.5s infinite ease-in-out;
+}
+
+@keyframes pulso-sobre {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.linea-carta {
+  opacity: 0;
+  animation: aparecer 1.2s forwards;
+  text-align: left;
+  margin: 10px 0;
+}
+
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.foto-revelada {
+  max-width: 250px;
+  border-radius: 10px;
+  border: 2px solid #4caf50;
+  margin: 15px 0;
+  animation: aparecer 1.5s forwards;
+}
+
+#btnLibro {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 20px;
+  background: #1a1a1a;
+  color: #4caf50;
+  border: 1px solid #4caf50;
+  border-radius: 6px;
+  text-decoration: none;
+}

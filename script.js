@@ -327,6 +327,104 @@ const contenidoExpedientes = {
     indiceAlterado: 3,
     pistaOculta: "No busques errores de gramática — no los hay. Busca cuál versión cambia qué fue la causa y qué fue la consecuencia.",
     recompensa: "ANÁLISIS FORENSE — COMPARACIÓN DE INFORMES\n\nTres oficinas, tres idiomas, un mismo significado. La cuarta fuente invierte el orden lógico: sugiere que la protección fue consecuencia de la integridad del archivo, no su causa.\n\nConclusión preliminar: el significado original sobrevivió al cambio de idioma en tres de los cuatro registros. Solo uno de ellos no proviene de una traducción — proviene de una alteración."
+  },
+  9: {
+    titulo: "EXPEDIENTE 09 — El sistema del inventor",
+    evidencia: "ARCHIVO 09. Tipo: diagrama de control de acceso. Estado: el sistema no genera la salida esperada.",
+    tipoReto: "logica",
+    explicacion: `Este sistema controla una puerta mediante dos sensores (A y B).
+
+El inventor dejó registrada una condición de funcionamiento: la puerta debe abrirse cuando exista una señal válida proveniente de cualquiera de los sensores.
+
+Sin embargo, durante las pruebas se detectó que el sistema no siempre responde como debería.
+
+Comportamiento actual del sistema:`,
+    tablaLogica: [
+      { A: 0, B: 0, salidaActual: 0 },
+      { A: 0, B: 1, salidaActual: 0 },
+      { A: 1, B: 0, salidaActual: 0 },
+      { A: 1, B: 1, salidaActual: 1 }
+    ],
+    pregunta: "Según la condición que dejó registrada el inventor (una señal válida de cualquiera de los sensores basta), ¿en cuál(es) fila(s) el sistema está dando una salida incorrecta? Escribe los números de fila (empezando en 1) separados por coma.",
+    filasIncorrectasEsperadas: "2,3",
+    pistaOculta: "El sistema actual parece exigir que ambas condiciones sean verdaderas al mismo tiempo. La regla esperada permite que una sola condición sea suficiente. Compara ambas reglas fila por fila.",
+    recompensa: "FRAGMENTO 09 RECUPERADO.\n\nEl sistema no estaba dañado — estaba mal configurado desde el diseño. La corrección requerida no era compleja, pero exigía comparar cada caso contra la regla real, no asumir que el comportamiento observado era correcto.\n\nHipótesis actual: el patrón de corrección coincide con el detectado en el archivo 05."
+  },
+  10: {
+    titulo: "EXPEDIENTE 10 — El ritmo oculto",
+    evidencia: "ARCHIVO 10. Tipo: registro de pulsos. Estado: patrón no identificado.",
+    tipoReto: "ritmo",
+    introRitmo: "El patrón parece repetirse, pero falta identificar la estructura.",
+    patronCompas: [1, 1, 1, 0, 1, 1, 1, 0], // posiciones 1,2,3,5,6,7 activas
+    velocidadMs: 550,
+    repeticionesAuto: 3,
+    codigoEsperado: "1,2,3,5,6,7",
+    pistaOculta: "Cada luz corresponde a una posición numerada del 1 al 8, en el orden en que se encienden. Anota solo los números donde SÍ hubo destello, en ese mismo orden.",
+    recompensaIntermedia: "El sistema necesita transformar este ritmo en un código numérico.",
+    recompensa: "FRAGMENTO 10 RECUPERADO.\n\nEl patrón coincide con una clave rítmica tradicional.\n\nEstructura repetitiva con intención, no ruido. Se detecta una respuesta consistente ante estímulos rítmicos en registros previos del caso."
+  },
+  11: {
+    titulo: "EXPEDIENTE 11 — Coordenadas",
+    evidencia: "ARCHIVO 11. Tipo: referencias cruzadas. Estado: requiere datos de expedientes anteriores.",
+    tipoReto: "coordenadas",
+    introduccion: "Este archivo no contiene evidencia nueva. Contiene una fórmula que combina resultados ya obtenidos en investigaciones anteriores.\n\nRevisa tus registros de los Archivos 02, 07 y 09 antes de continuar.",
+    formula: "Toma el resultado numérico del Archivo 02. Súmale la cantidad de palabras del mensaje reconstruido en el Archivo 07. Multiplica ese resultado por la suma de los números de fila que encontraste en el Archivo 09.\n\nCódigo final = (A + B) × C",
+    codigoEsperado: "35",
+    pistaOculta: "A = 3 (Archivo 02). B = 4, porque 'mismo origen distinto nombre' tiene 4 palabras (Archivo 07). C = 5, porque 2 + 3 = 5 (Archivo 09). (3 + 4) × 5 = 35.",
+    recompensa: "FRAGMENTO 11 RECUPERADO.\n\nLos archivos 02, 07 y 09 comparten un mismo origen — sus datos encajan en una sola estructura, no en tres registros separados."
+  },
+  12: {
+    titulo: "EXPEDIENTE 12 — Archivo contradictorio",
+    evidencia: "ARCHIVO 12. Tipo: Registros de procesamiento. Estado: inconsistencia detectada.",
+    tipoReto: "perfiles",
+    introduccion: "Tres modelos de comportamiento fueron generados a partir de los archivos 03, 06 y 10. A simple vista, parecen describir a tres sujetos distintos. El sistema no puede confirmar si pertenecen a la misma investigación.",
+    perfiles: [
+      { fuente: "Archivo 03", texto: "Sujeto metódico. No abandona un intento hasta encontrar la solución correcta, incluso tras varios fallos." },
+      { fuente: "Archivo 06", texto: "Sujeto intuitivo. Reconoce de inmediato, sin necesidad de análisis previo." },
+      { fuente: "Archivo 10", texto: "Sujeto sensible a estructuras repetitivas, capaz de distinguir intención donde otros solo ven ruido." }
+    ],
+    pregunta: "¿Qué característica común permite que estos tres modelos de comportamiento pertenezcan a la misma persona, a pesar de parecer contradictorios?",
+    codigoEsperado: "reconocimiento de patrones",
+    pistaOculta: "Ajedrez, voz y ritmo no tienen nada en común como temas... pero la ACCIÓN que el sujeto hace en los tres casos sí. ¿Qué hace alguien cuando analiza una jugada, reconoce una voz, y distingue un ritmo?",
+    recompensa: "ALERTA RESUELTA.\n\nLos perfiles 03, 06 y 10 no describen a tres sujetos — describen tres dominios distintos de un mismo mecanismo. El sistema reclasifica los archivos como compatibles.\n\nHipótesis actualizada: no se está investigando un objeto, ni siquiera un conjunto de habilidades aisladas. Se investiga una forma consistente de procesar información."
+  },
+  13: {
+    titulo: "EXPEDIENTE 13 — Los fragmentos",
+    evidencia: "ARCHIVO 13. Tipo: consolidado. Estado: requiere unir datos de expedientes anteriores.",
+    tipoReto: "coordenadas",
+    introduccion: "Los fragmentos sueltos de esta investigación no tienen valor por separado. El sistema requiere que se combinen los resultados de dos archivos ya procesados para generar el código final.",
+    formula: "El Archivo 7 y 11 pueden ser de ayuda.\n\n",
+    codigoEsperado: "28",
+    pistaOculta: "El Archivo 11 dio como resultado 35. El archivo con la transmisión en francés era el Archivo 07. 35 − 7 = 28.",
+    recompensa: "FRAGMENTO 13 RECUPERADO.\n\nLas piezas no encajan entre sí todavía en su forma — pero cada una, por separado, ya sostiene información completa. El sistema empieza a converger hacia un único registro.\n\nHipótesis actualizada: El resultado no corresponde a una ubicación, una clave ni un objeto.."
+  },
+  14: {
+    titulo: "EXPEDIENTE 14 — La última búsqueda",
+    evidencia: "ARCHIVO 14. Tipo: intento de identificación. Estado: coincidencia incompleta.",
+    tipoReto: "revelacion",
+    estadoInicial: "PERFIL EN CONSTRUCCIÓN",
+    estadoActualizado: "COINCIDENCIA PARCIAL: 87%",
+    hipotesis: "El sistema cruzó los 13 archivos procesados contra su base de datos.\n\nNo alcanza el 100% de coincidencia. Falta una variable que ningún archivo puede aportar por sí solo.",
+    preguntaInvestigador: "El sistema requiere tu hipótesis personal para intentar cerrar el porcentaje restante: ¿qué crees que realmente estabas buscando?",
+    recompensa: "HIPÓTESIS REGISTRADA.\n\nLa variable faltante no estaba en ningún archivo — estaba en la persona que investigaba.\n\nEl sistema está listo para procesar la identificación final."
+  },
+  15: {
+    titulo: "EXPEDIENTE 15 — Caso cerrado",
+    evidencia: "ARCHIVO FINAL. Estado de investigación: COMPLETADO.",
+    tipoReto: "casoCerrado",
+    hipotesisInicial: "Coincidencia parcial: 87%",
+    resultadoHipotesis: "PROCESANDO VARIABLE APORTADA POR EL INVESTIGADOR...",
+    nuevaClasificacion: "Coincidencia actualizada: 100%.\n\nLa variable faltante no estaba en los archivos.\n\nEstaba en la hipótesis que tú mismo escribiste.",
+    cartaLineas: [
+      "Si llegaste hasta aquí, significa que resolviste cada pista, cada contradicción y cada patrón oculto.",
+      "Durante toda la investigación buscaste algo que parecía perdido.",
+      "Pero la hipótesis inicial estaba equivocada.",
+      "No se estaba buscando un objeto.",
+      "Se estaban reconstruyendo las piezas de una persona."
+    ],
+    fotoSujeto: "media/shi.png",
+    mensajeFinal: "Cada archivo reveló una parte diferente: curiosidad, perseverancia, creatividad, adaptación y la capacidad de encontrar patrones donde otros solo ven caos.\n\nTodas esas piezas siempre pertenecieron a la misma persona.",
+    linkLibro: "https://goo.su/gVBkm2U"
   }
 };
 
@@ -675,7 +773,216 @@ function abrirExpediente(numero) {
       listaInformes.appendChild(tarjeta);
     });
   }
+  else if (data.tipoReto === "logica") {
+    let filasHTML = data.tablaLogica.map(function(fila, i) {
+      return `<tr><td>Fila ${i + 1}</td><td>A = ${fila.A}</td><td>B = ${fila.B}</td><td>Salida actual = ${fila.salidaActual}</td></tr>`;
+    }).join("");
 
+    modalReto.innerHTML = `
+      <p class="pista" style="white-space: pre-line; text-align:left;">${data.explicacion}</p>
+      <table class="tabla-logica">
+        <tr><th></th><th>Sensor A</th><th>Sensor B</th><th>Salida</th></tr>
+        ${filasHTML}
+      </table>
+      <p class="pista">${data.pregunta}</p>
+      <input type="text" id="inputLogica" placeholder="Ej. 2,3">
+      <button id="btnConfirmarLogica">Confirmar</button>
+      <p class="error" id="errorLogica"></p>
+    `;
+
+    document.getElementById("btnConfirmarLogica").addEventListener("click", function () {
+      const valorInput = document.getElementById("inputLogica").value
+        .trim()
+        .replace(/\s+/g, "");
+
+      if (valorInput === "") return;
+
+      if (valorInput === data.filasIncorrectasEsperadas) {
+        modalRecompensa.style.whiteSpace = "pre-line";
+        modalRecompensa.style.textAlign = "left";
+        modalRecompensa.textContent = data.recompensa;
+        modalRecompensa.classList.remove("oculto");
+        marcarCompletado(numero);
+        actualizarEstadoCasilla(numero);
+      } else {
+        const errorLogica = document.getElementById("errorLogica");
+        errorLogica.textContent = "Eso no coincide. Pista: " + data.pistaOculta;
+      }
+    });
+  }
+  else if (data.tipoReto === "ritmo") {
+    modalReto.innerHTML = `
+      <p class="pista">${data.introRitmo}</p>
+      <div id="filaRitmo"></div>
+      <button id="btnReproducirRitmo">Reproducir de nuevo</button>
+      <div id="preguntaRitmo" class="oculto">
+        <p class="pista">${data.recompensaIntermedia}</p>
+        <input type="text" id="inputRitmo" placeholder="Ej. 1,3,4">
+        <button id="btnConfirmarRitmo">Confirmar</button>
+      </div>
+      <p class="error" id="errorRitmo"></p>
+    `;
+
+    const filaRitmo = document.getElementById("filaRitmo");
+    const preguntaRitmo = document.getElementById("preguntaRitmo");
+
+    // crear las 8 luces, sin números todavía (solo círculos vacíos)
+    data.patronCompas.forEach(function (_, indice) {
+      const luz = document.createElement("span");
+      luz.classList.add("luz-ritmo");
+      luz.id = `pulso-${indice}`;
+      filaRitmo.appendChild(luz);
+    });
+
+    function reproducirPatron() {
+      const duracionCompas = data.patronCompas.length * data.velocidadMs;
+
+      for (let vuelta = 0; vuelta < data.repeticionesAuto; vuelta++) {
+        data.patronCompas.forEach(function (esGolpe, indice) {
+          if (esGolpe === 1) {
+            setTimeout(function () {
+              const luz = document.getElementById(`pulso-${indice}`);
+              luz.classList.add("luz-activa");
+              setTimeout(function () {
+                luz.classList.remove("luz-activa");
+              }, data.velocidadMs * 0.6);
+            }, vuelta * duracionCompas + indice * data.velocidadMs);
+          }
+        });
+      }
+
+      // después de todas las repeticiones, revela los números y la pregunta
+      setTimeout(function () {
+        preguntaRitmo.classList.remove("oculto");
+      }, data.repeticionesAuto * duracionCompas + 300);
+    }
+
+    reproducirPatron();
+
+    document.getElementById("btnReproducirRitmo").addEventListener("click", reproducirPatron);
+
+    document.getElementById("btnConfirmarRitmo").addEventListener("click", function () {
+      const valorInput = document.getElementById("inputRitmo").value.trim().replace(/\s+/g, "");
+
+      if (valorInput === "") return;
+
+      if (valorInput === data.codigoEsperado) {
+        modalRecompensa.style.whiteSpace = "pre-line";
+        modalRecompensa.style.textAlign = "left";
+        modalRecompensa.textContent = data.recompensa;
+        modalRecompensa.classList.remove("oculto");
+        marcarCompletado(numero);
+        actualizarEstadoCasilla(numero);
+      } else {
+        const errorRitmo = document.getElementById("errorRitmo");
+        errorRitmo.textContent = "Ese patrón no coincide. Pista: " + data.pistaOculta;
+      }
+    });
+  }
+  else if (data.tipoReto === "coordenadas") {
+    modalReto.innerHTML = `
+      <p class="pista" style="white-space: pre-line; text-align:left;">${data.introduccion}</p>
+      <p class="pista" style="white-space: pre-line; text-align:left;">${data.formula}</p>
+      <input type="text" id="inputCoordenadas" placeholder="Código final">
+      <button id="btnConfirmarCoordenadas">Confirmar</button>
+      <p class="error" id="errorCoordenadas"></p>
+    `;
+
+    document.getElementById("btnConfirmarCoordenadas").addEventListener("click", function () {
+      const valorInput = document.getElementById("inputCoordenadas").value.trim();
+
+      if (valorInput === "") return;
+
+      if (valorInput === data.codigoEsperado) {
+        modalRecompensa.style.whiteSpace = "pre-line";
+        modalRecompensa.style.textAlign = "left";
+        modalRecompensa.textContent = data.recompensa;
+        modalRecompensa.classList.remove("oculto");
+        marcarCompletado(numero);
+        actualizarEstadoCasilla(numero);
+      } else {
+        const errorCoordenadas = document.getElementById("errorCoordenadas");
+        errorCoordenadas.textContent = "Ese código no coincide. Pista: " + data.pistaOculta;
+      }
+    });
+  }
+  else if (data.tipoReto === "perfiles") {
+    let htmlPerfiles = data.perfiles.map(function (perfil) {
+      return `<div class="tarjeta-perfil"><strong>${perfil.fuente}</strong><p>${perfil.texto}</p></div>`;
+    }).join("");
+
+    modalReto.innerHTML = `
+      <p class="pista">${data.introduccion}</p>
+      <div id="listaPerfiles">${htmlPerfiles}</div>
+      <p class="pista">${data.pregunta}</p>
+      <input type="text" id="inputPerfiles" placeholder="Escribe tu respuesta">
+      <button id="btnConfirmarPerfiles">Confirmar</button>
+      <p class="error" id="errorPerfiles"></p>
+    `;
+
+    document.getElementById("btnConfirmarPerfiles").addEventListener("click", function () {
+      const valorInput = document.getElementById("inputPerfiles").value
+        .trim()
+        .toLowerCase()
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+      const esperado = data.codigoEsperado
+        .toLowerCase()
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+      if (valorInput === "") return;
+
+      // acepta la respuesta aunque falte "de" o esté en otro orden simple
+      const contienePalabrasClave = valorInput.includes("reconocimiento") && valorInput.includes("patron");
+
+      if (valorInput === esperado || contienePalabrasClave) {
+        modalRecompensa.style.whiteSpace = "pre-line";
+        modalRecompensa.style.textAlign = "left";
+        modalRecompensa.textContent = data.recompensa;
+        modalRecompensa.classList.remove("oculto");
+        marcarCompletado(numero);
+        actualizarEstadoCasilla(numero);
+      } else {
+        const errorPerfiles = document.getElementById("errorPerfiles");
+        errorPerfiles.textContent = "Esa respuesta no reconcilia los tres perfiles. Pista: " + data.pistaOculta;
+      }
+    });
+  }
+  else if (data.tipoReto === "revelacion") {
+    modalReto.innerHTML = `
+      <p class="pista"><s>${data.estadoInicial}</s></p>
+      <p class="cifrado">${data.estadoActualizado}</p>
+      <p class="pista" style="white-space: pre-line;">${data.hipotesis}</p>
+      <button id="btnContinuarRevelacion">Continuar</button>
+    `;
+
+    document.getElementById("btnContinuarRevelacion").addEventListener("click", function () {
+      modalReto.innerHTML = `
+        <p class="pista">${data.preguntaInvestigador}</p>
+        <input type="text" id="inputHipotesis" placeholder="Escribe tu hipótesis">
+        <button id="btnRegistrarHipotesis">Registrar hipótesis</button>
+      `;
+
+      document.getElementById("btnRegistrarHipotesis").addEventListener("click", function () {
+        const hipotesisEscrita = document.getElementById("inputHipotesis").value.trim();
+        if (hipotesisEscrita === "") return;
+
+        modalReto.innerHTML = `<p class="pista">Hipótesis registrada: "${hipotesisEscrita}"</p><p class="pista">El sistema procesará esta hipótesis contra la evidencia final.</p>`;
+
+        modalRecompensa.style.whiteSpace = "pre-line";
+        modalRecompensa.style.textAlign = "left";
+        modalRecompensa.textContent = data.recompensa;
+        modalRecompensa.classList.remove("oculto");
+        marcarCompletado(numero);
+        actualizarEstadoCasilla(numero);
+      });
+    });
+  }
+  else if (data.tipoReto === "casoCerrado") {
+    marcarCompletado(numero);
+    actualizarEstadoCasilla(numero);
+    mostrarFase1(data);
+  }
   modalOverlay.classList.remove("oculto");
 }
 
@@ -688,6 +995,95 @@ function actualizarEstadoCasilla(numero) {
   if (casilla) {
     casilla.classList.add("completado");
   }
+}
+function mostrarFase1(data) {
+  modalReto.innerHTML = `
+    <p class="pista">Hipótesis inicial:</p>
+    <p class="cifrado">"${data.hipotesisInicial}"</p>
+    <p class="pista">Resultado:</p>
+    <p class="cifrado" style="color:#e05555;">${data.resultadoHipotesis}</p>
+    <button id="btnAbrirInforme">📂 Abrir informe completo</button>
+  `;
+
+  document.getElementById("btnAbrirInforme").addEventListener("click", function () {
+    modalReto.innerHTML = `
+      <p class="pista">Nueva clasificación:</p>
+      <p class="cifrado" style="white-space: pre-line;">${data.nuevaClasificacion}</p>
+      <button id="btnContinuarCarta">Continuar</button>
+    `;
+    document.getElementById("btnContinuarCarta").addEventListener("click", function () {
+      mostrarFase2(data);
+    });
+  });
+}
+
+function mostrarFase2(data) {
+  modalReto.innerHTML = `
+    <div id="sobreCarta" class="sobre-cerrado">✉️</div>
+    <div id="contenidoCarta" class="oculto"></div>
+  `;
+
+  const sobre = document.getElementById("sobreCarta");
+  sobre.addEventListener("click", function abrirSobre() {
+    sobre.classList.add("oculto");
+    document.getElementById("contenidoCarta").classList.remove("oculto");
+    sobre.removeEventListener("click", abrirSobre);
+    revelarLineasCarta(data.cartaLineas, 0, data);
+  });
+}
+
+function revelarLineasCarta(lineas, indice, data) {
+  if (indice >= lineas.length) {
+    const contenedor = document.getElementById("contenidoCarta");
+    const btn = document.createElement("button");
+    btn.textContent = "Continuar";
+    btn.addEventListener("click", function () {
+      mostrarFase3(data);
+    });
+    contenedor.appendChild(btn);
+    return;
+  }
+  const contenedor = document.getElementById("contenidoCarta");
+  const parrafo = document.createElement("p");
+  parrafo.classList.add("linea-carta");
+  parrafo.textContent = lineas[indice];
+  contenedor.appendChild(parrafo);
+
+  setTimeout(function () {
+    revelarLineasCarta(lineas, indice + 1, data);
+  }, 1800);
+}
+
+function mostrarFase3(data) {
+  modalReto.innerHTML = `
+    <p class="cifrado">IDENTIDAD DEL SUJETO: <span style="color:#4caf50;">CONFIRMADA</span></p>
+    <p class="pista">ARCHIVOS ANALIZADOS: 15/15</p>
+    <p class="pista">COINCIDENCIA: 100% (completada con la hipótesis del investigador)</p>
+    <button id="btnRevelarFoto">Identificar sujeto</button>
+  `;
+
+  document.getElementById("btnRevelarFoto").addEventListener("click", function () {
+    modalReto.innerHTML = `
+      <p class="pista" style="text-align:center;">Sujeto identificado.</p>
+      <div style="text-align:center;">
+        <img src="${data.fotoSujeto}" alt="Sujeto identificado" class="foto-revelada">
+      </div>
+      <button id="btnMensajeFinal">Continuar</button>
+    `;
+    document.getElementById("btnMensajeFinal").addEventListener("click", function () {
+      mostrarMensajeFinal(data);
+    });
+  });
+}
+
+function mostrarMensajeFinal(data) {
+  modalReto.innerHTML = `
+    <p class="pista" style="white-space: pre-line; text-align:center;">${data.mensajeFinal}</p>
+    <p class="cifrado" style="font-size: 20px; margin-top: 20px; text-align:center;">CASO CERRADO</p>
+    <p class="cifrado" style="color:#4caf50; text-align:center;">Feliz cumpleaños 🎂</p>
+    <p class="pista" style="margin-top: 25px; text-align:center;">Toda investigación termina, pero todo aprendizaje continúa.</p>
+    <a href="${data.linkLibro}" target="_blank" id="btnLibro">Continuar explorando</a>
+  `;
 }
 
 async function construirPagina() {
